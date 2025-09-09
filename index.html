@@ -34,220 +34,185 @@
     <style>
       body {
         font-family: 'Nunito', sans-serif;
+        background-color: #FEFAFD;
+        overflow-x: hidden;
+      }
+      .scroll-animate {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+      .scroll-animate.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+        100% { transform: translateY(0px); }
+      }
+      .animate-float {
+        animation: float 6s ease-in-out infinite;
       }
     </style>
-<script type="importmap">
-{
-  "imports": {
-    "react": "https://aistudiocdn.com/react@^19.1.1",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
-    "react/": "https://aistudiocdn.com/react@^19.1.1/"
-  }
-}
-</script>
 </head>
-  <body>
+  <body class="bg-[#FEFAFD]">
     <div id="root">
-        <div class="bg-[#FEFAFD] min-h-screen font-body text-gray-800">
-            <main class="container mx-auto max-w-3xl p-4 relative">
-              <div class="bg-white rounded-2xl shadow-lg overflow-hidden pb-4">
-                
-                <div class="absolute top-20 -left-12 sm:-left-16 opacity-80 -rotate-12">
-                  <svg viewBox="0 0 100 100" class="w-32 h-32 sm:w-40 sm:h-40" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="20" y="50" width="30" height="30" fill="#F7B9D4" stroke="#8E6A5A" strokeWidth="2" rx="3" />
-                    <text x="35" y="70" fontFamily="Fredoka" fontSize="18" fill="#fff" textAnchor="middle">1</text>
-                    <rect x="40" y="30" width="30" height="30" fill="#C3E0F4" stroke="#8E6A5A" strokeWidth="2" rx="3" />
-                     <text x="55" y="50" fontFamily="Fredoka" fontSize="18" fill="#fff" textAnchor="middle">8</text>
-                    <rect x="60" y="50" width="30" height="30" fill="#FAF3A5" stroke="#8E6A5A" strokeWidth="2" rx="3" />
-                     <text x="75" y="70" fontFamily="Fredoka" fontSize="18" fill="#fff" textAnchor="middle">4</text>
-                  </svg>
-                </div>
-                <div class="absolute top-1/3 -left-12 opacity-80">
-                   <svg viewBox="0 0 100 100" class="w-32 h-32 sm:w-40 sm:h-40" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M 25 80 L 35 30 L 65 30 L 75 80" fill="#C6C6E8" stroke="#8E6A5A" strokeWidth="2" />
-                    <rect x="30" y="38" width="40" height="15" fill="#F7B9D4" rx="5" stroke="#8E6A5A" strokeWidth="2" />
-                    <rect x="25" y="55" width="50" height="8" fill="#FAF3A5" rx="3" stroke="#8E6A5A" strokeWidth="2" />
-                    <line x1="30" y1="80" x2="45" y2="30" stroke="#F7B9D4" strokeWidth="4" />
-                    <line x1="70" y1="80" x2="55" y2="30" stroke="#F7B9D4" strokeWidth="4" />
-                  </svg>
-                </div>
-                 <div class="absolute bottom-1/4 -left-10 opacity-80">
-                   <svg viewBox="0 0 100 100" class="w-32 h-32 sm:w-40 sm:h-40" xmlns="http://www.w3.org/2000/svg">
-                      <ellipse cx="50" cy="80" rx="40" ry="10" fill="#F7B9D4" stroke="#8E6A5A" strokeWidth="2"/>
-                      <ellipse cx="50" cy="68" rx="35" ry="9" fill="#C3E0F4" stroke="#8E6A5A" strokeWidth="2"/>
-                      <ellipse cx="50" cy="56" rx="30" ry="8" fill="#D5EBD3" stroke="#8E6A5A" strokeWidth="2"/>
-                      <ellipse cx="50" cy="44" rx="25" ry="7" fill="#FAF3A5" stroke="#8E6A5A" strokeWidth="2"/>
-                      <ellipse cx="50" cy="30" rx="15" ry="10" fill="#C6C6E8" stroke="#8E6A5A" strokeWidth="2"/>
-                  </svg>
-                </div>
-                
-                <div class="absolute top-1/4 -right-16 sm:-right-20 opacity-80">
-                  <svg viewBox="0 0 100 100" class="w-32 h-32 sm:w-48 sm:h-48" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="50" cy="55" r="30" fill="#D2B48C" stroke="#8E6A5A" strokeWidth="2" />
-                    <circle cx="35" cy="30" r="12" fill="#D2B48C" stroke="#8E6A5A" strokeWidth="2" />
-                    <circle cx="65" cy="30" r="12" fill="#D2B48C" stroke="#8E6A5A" strokeWidth="2" />
-                    <circle cx="50" cy="60" r="15" fill="#F5DEB3" />
-                    <circle cx="45" cy="52" r="3" fill="#8E6A5A" />
-                    <circle cx="55" cy="52" r="3" fill="#8E6A5A" />
-                    <path d="M 45 65 Q 50 70 55 65" stroke="#8E6A5A" strokeWidth="2" fill="none" />
-                    <path d="M 50 58 L 50 63" stroke="#8E6A5A" strokeWidth="2" fill="none" />
-                    <g transform="translate(42 53) scale(0.1)">
-                       <path fill="#F7B9D4" d="M512 97.712c-48.448-69.344-148.512-108.064-245.824-60.32C170.88 83.136 128 174.464 128 262.112c0 88.352 71.648 160 160 160s160-71.648 160-160c0-5.856-0.352-11.616-0.96-17.28 48.064 11.456 94.208 42.176 120.352 87.552 4.416 7.648 14.24 9.92 21.888 5.504s9.92-14.24 5.504-21.888z"/>
-                    </g>
-                  </svg>
-                </div>
-                <div class="absolute bottom-1/4 -right-12 opacity-80">
-                  <svg viewBox="0 0 100 100" class="w-32 h-32 sm:w-40 sm:h-40" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="50" cy="50" r="40" fill="#fff" stroke="#8E6A5A" strokeWidth="2"/>
-                    <path d="M50,10 A40,40 0 0,1 84.64,30 L50,50 Z" fill="#F7B9D4"/>
-                    <path d="M84.64,30 A40,40 0 0,1 84.64,70 L50,50 Z" fill="#FAF3A5"/>
-                    <path d="M84.64,70 A40,40 0 0,1 50,90 L50,50 Z" fill="#C3E0F4"/>
-                    <path d="M50,90 A40,40 0 0,1 15.36,70 L50,50 Z" fill="#D5EBD3"/>
-                    <path d="M15.36,70 A40,40 0 0,1 15.36,30 L50,50 Z" fill="#C6C6E8"/>
-                    <path d="M15.36,30 A40,40 0 0,1 50,10 L50,50 Z" fill="#fff"/>
-                    <circle cx="50" cy="50" r="40" fill="none" stroke="#8E6A5A" strokeWidth="2"/>
-                    <circle cx="50" cy="10" r="8" fill="#fff" stroke="#8E6A5A" strokeWidth="2"/>
-                  </svg>
-                </div>
-      
-                <div class="relative z-10">
-                  <header class="w-full flex flex-col items-center text-center mt-8">
-                    <div class="flex justify-center space-x-2 sm:space-x-4 mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 sm:w-10 sm:h-10 text-brand-yellow drop-shadow-sm" style="transform: translateY(10px);">
-                            <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.007z" clip-rule="evenodd"></path>
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 sm:w-10 sm:h-10 text-brand-purple drop-shadow-sm">
-                            <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.007z" clip-rule="evenodd"></path>
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 sm:w-10 sm:h-10 text-brand-yellow drop-shadow-sm" style="transform: translateY(10px);">
-                            <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.007z" clip-rule="evenodd"></path>
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 sm:w-10 sm:h-10 text-brand-purple drop-shadow-sm">
-                            <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.007z" clip-rule="evenodd"></path>
-                        </svg>
-                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 sm:w-10 sm:h-10 text-brand-yellow drop-shadow-sm" style="transform: translateY(10px);">
-                            <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.007z" clip-rule="evenodd"></path>
-                        </svg>
-                    </div>
-                    <h1 class="font-display text-5xl sm:text-7xl font-medium text-brand-text drop-shadow-md">
-                      Día del Bebé Prematuro
-                    </h1>
-                  </header>
-
-                  <section class="w-full my-8 p-4">
-                    <div class="flex flex-col sm:flex-row justify-around items-center text-center font-body text-brand-text-dark space-y-4 sm:space-y-0">
-                      <div class="text-xl">
-                        <p class="font-bold text-2xl">Lugar:</p>
-                        <p>Auditorium Hospital IGSS</p>
-                        <p>Quetzaltenango</p>
-                      </div>
-                      <div class="text-xl">
-                        <p class="font-display text-5xl sm:text-6xl text-brand-text">17</p>
-                        <p class="text-2xl">Noviembre 2025</p>
-                      </div>
-                      <div class="text-xl">
-                        <p class="font-bold text-2xl">Hora</p>
-                        <p>9:30 a 12:00 Horas</p>
-                      </div>
-                    </div>
-                  </section>
-                  
-                  <section class="w-full flex flex-col items-center my-4 px-4 font-body">
-                    <div class="text-center text-brand-text-dark mb-4">
-                      <a href="tel:50183145" class="flex items-center justify-center space-x-2 text-xl font-bold bg-green-200 rounded-full px-4 py-2 hover:bg-green-300 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-                          <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.518.759a11.024 11.024 0 00.485 2.487l.758-1.517a1 1 0 011.06-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2.153a1 1 0 01-.986-.836l-.74-4.435a1 1 0 01.54-1.06l1.518-.759a11.024 11.024 0 00-2.487-.485l-.758 1.517a1 1 0 01-1.06.54l-4.435-.74A1 1 0 012 11.846V3z" />
-                        </svg>
-                        <span>5018-3145</span>
-                      </a>
-                      <p class="mt-2 text-lg">Confirma tu asistencia</p>
-                      <p>De la siguiente manera:</p>
-                    </div>
-                    <div class="w-full max-w-md space-y-3 text-brand-text-dark text-center">
-                      <div class="bg-brand-mint p-3 rounded-lg shadow-sm">
-                        <span class="font-bold">1.</span> Nombre completo de quien en su momento fue prematuro
-                      </div>
-                      <div class="bg-brand-mint p-3 rounded-lg shadow-sm">
-                        <span class="font-bold">2.</span> Nombres de acompañantes (no mas de 2 personas)
-                      </div>
-                      <div class="bg-brand-mint p-3 rounded-lg shadow-sm">
-                        <span class="font-bold">3.</span> Número de celular para agregar a grupo de WhatsApp
-                      </div>
-                    </div>
-                  </section>
-                  
-                  <section class="w-full bg-brand-green my-8 py-6 px-4 font-body text-brand-text-dark flex justify-center">
-                     <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-8">
-                        <svg viewBox="0 0 100 100" class="w-24 h-24" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="50" cy="50" r="30" fill="#fff" stroke="#8E6A5A" strokeWidth="2" />
-                            <path d="M35 30 L65 30 L50 10 Z" fill="#E63946" />
-                            <circle cx="50" y="10" r="5" fill="#FCA311" />
-                            <circle cx="40" cy="45" r="3" fill="black" />
-                            <circle cx="60" cy="45" r="3" fill="black" />
-                            <circle cx="50"cy="55" r="7" fill="#E63946" />
-                            <path d="M 40 65 Q 50 75 60 65" stroke="black" strokeWidth="2" fill="none" />
-                            <path d="M 20 50 C 30 30, 70 30, 80 50" fill="none" stroke="#457B9D" strokeWidth="3" />
-                        </svg>
-                        <div class="text-center sm:text-left">
-                          <h2 class="text-3xl font-bold">Tendremos:</h2>
-                          <ul class="list-disc list-inside text-xl space-y-1 mt-2">
-                            <li>Globoflexia</li>
-                            <li>Show de payasos</li>
-                            <li>Candy bar</li>
-                          </ul>
-                        </div>
-                        <svg viewBox="0 0 100 100" class="w-24 h-24 text-brand-purple" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M 50 50 C 10 20, 10 80, 50 50" fill="currentColor" />
-                            <path d="M 50 50 C 90 20, 90 80, 50 50" fill="currentColor" />
-                            <path d="M 50 30 L 50 70" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
-                            <circle cx="50" cy="25" r="3" fill="currentColor" />
-                            <circle cx="50" cy="75" r="3" fill="currentColor" />
-                        </svg>
-                     </div>
-                  </section>
-
-                  <footer class="w-full text-center mt-4 mb-8 px-4 font-body italic text-brand-text-dark">
-                      <p>"La Fe sin ciencia, es coja; la ciencia sin fe, es ciega"</p>
-                  </footer>
-                </div>
-              </div>
-            </main>
-            
-            <div class="fixed bottom-4 right-4 z-50">
-                <audio id="background-music" src="https://cdn.pixabay.com/audio/2022/10/28/audio_86301356b1.mp3" loop preload="auto"></audio>
-                <button id="music-toggle" class="bg-brand-pink text-white rounded-full p-3 shadow-lg hover:bg-brand-text focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-pink transition-transform transform hover:scale-110" aria-label="Play music">
-                </button>
+        <!-- Hero Section -->
+        <section id="hero" class="h-screen w-screen flex flex-col items-center justify-center text-center relative overflow-hidden p-4">
+             <div class="absolute top-10 left-10 animate-float">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-brand-pink" viewBox="0 0 100 100"><g transform="translate(0 -952.36)"><path d="m66.92 1013.9c-3.95-12.23-14.88-21.2-27.42-21.2-12.55 0-23.47 8.97-27.42 21.2h-12.08c2.9-19.86 19.28-35.39 39.5-35.39 20.22 0 36.6 15.53 39.5 35.39h-12.08z" fill="currentColor"/><path d="m39.5 992.7c-16.14 0-29.47 11.5-33.19 26.6-4.59 1.1-8.1 5.1-8.1 9.9 0 5.7 4.6 10.2 10.2 10.2h50.18c5.7 0 10.2-4.6 10.2-10.2 0-4.7-3.5-8.8-8.1-9.9-3.7-15.1-17.05-26.6-33.19-26.6-5.8 0-11.24 1.5-16.09 4.1-4.85-2.6-10.29-4.1-16.09-4.1z" fill="currentColor" transform="matrix(.72 0 0 .72 14 280.65)"/></g></svg>
+             </div>
+             <div class="absolute top-1/4 right-5 animate-float" style="animation-delay: 1s;">
+                 <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 text-brand-blue" viewBox="0 0 100 100"><circle cx="50" cy="40" r="30" fill="currentColor"/><path d="M50 70 l-10 20 h20 z" fill="currentColor"/></svg>
+             </div>
+             <div class="absolute bottom-1/4 left-5 animate-float" style="animation-delay: 0.5s;">
+                 <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 text-brand-yellow" viewBox="0 0 100 100"><circle cx="50" cy="40" r="30" fill="currentColor"/><path d="M50 70 l-10 20 h20 z" fill="currentColor"/></svg>
+             </div>
+             <div class="absolute bottom-10 right-10 animate-float" style="animation-delay: 1.5s;">
+                <svg viewBox="0 0 100 100" class="w-32 h-32" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="55" r="30" fill="#D2B48C" stroke="#8E6A5A" strokeWidth="2" /><circle cx="35" cy="30" r="12" fill="#D2B48C" stroke="#8E6A5A" strokeWidth="2" /><circle cx="65" cy="30" r="12" fill="#D2B48C" stroke="#8E6A5A" strokeWidth="2" /><circle cx="50" cy="60" r="15" fill="#F5DEB3" /><circle cx="45" cy="52" r="3" fill="#8E6A5A" /><circle cx="55" cy="52" r="3" fill="#8E6A5A" /><path d="M 45 65 Q 50 70 55 65" stroke="#8E6A5A" strokeWidth="2" fill="none" /><path d="M 50 58 L 50 63" stroke="#8E6A5A" strokeWidth="2" fill="none" /></svg>
+             </div>
+            <div class="z-10">
+                <p class="font-display text-2xl sm:text-4xl text-brand-text-dark mb-2">¡Celebremos la vida!</p>
+                <h1 class="font-display text-5xl sm:text-7xl font-medium text-brand-text drop-shadow-md">
+                    Día del Bebé Prematuro
+                </h1>
             </div>
+             <div class="absolute bottom-10 text-brand-text-dark font-bold text-lg animate-pulse">
+                <p>Desliza para descubrir</p>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <main class="container mx-auto max-w-3xl p-4 relative">
+          <div class="bg-white rounded-2xl shadow-lg overflow-hidden pb-4">
+            <div class="relative z-10">
+              
+              <section class="w-full my-16 p-4 scroll-animate">
+                <div class="flex flex-col sm:flex-row justify-around items-center text-center font-body text-brand-text-dark space-y-8 sm:space-y-0">
+                  <div class="text-xl">
+                    <p class="font-bold text-2xl">Lugar:</p>
+                    <p>Auditorium Hospital IGSS</p>
+                    <p>Quetzaltenango</p>
+                  </div>
+                  <div class="text-xl">
+                    <p class="font-display text-5xl sm:text-6xl text-brand-text">17</p>
+                    <p class="text-2xl">Noviembre 2025</p>
+                  </div>
+                  <div class="text-xl">
+                    <p class="font-bold text-2xl">Hora</p>
+                    <p>9:30 a 12:00 Horas</p>
+                  </div>
+                </div>
+              </section>
+              
+              <section class="w-full bg-brand-green my-8 py-6 px-4 font-body text-brand-text-dark flex justify-center scroll-animate">
+                 <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-8">
+                    <svg viewBox="0 0 100 100" class="w-24 h-24" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="30" fill="#fff" stroke="#8E6A5A" strokeWidth="2" /><path d="M35 30 L65 30 L50 10 Z" fill="#E63946" /><circle cx="50" y="10" r="5" fill="#FCA311" /><circle cx="40" cy="45" r="3" fill="black" /><circle cx="60" cy="45" r="3" fill="black" /><circle cx="50"cy="55" r="7" fill="#E63946" /><path d="M 40 65 Q 50 75 60 65" stroke="black" strokeWidth="2" fill="none" /><path d="M 20 50 C 30 30, 70 30, 80 50" fill="none" stroke="#457B9D" strokeWidth="3" /></svg>
+                    <div class="text-center sm:text-left">
+                      <h2 class="text-3xl font-bold">Tendremos:</h2>
+                      <ul class="list-disc list-inside text-xl space-y-1 mt-2">
+                        <li>Globoflexia</li>
+                        <li>Show de payasos</li>
+                        <li>Candy bar</li>
+                      </ul>
+                    </div>
+                    <svg viewBox="0 0 100 100" class="w-24 h-24 text-brand-purple" xmlns="http://www.w3.org/2000/svg"><path d="M 50 50 C 10 20, 10 80, 50 50" fill="currentColor" /><path d="M 50 50 C 90 20, 90 80, 50 50" fill="currentColor" /><path d="M 50 30 L 50 70" stroke="currentColor" strokeWidth="4" strokeLinecap="round" /><circle cx="50" cy="25" r="3" fill="currentColor" /><circle cx="50" cy="75" r="3" fill="currentColor" /></svg>
+                 </div>
+              </section>
+              
+              <section class="w-full flex flex-col items-center my-16 px-4 font-body scroll-animate">
+                <div class="text-center text-brand-text-dark relative w-full max-w-lg">
+                   <div class="absolute -top-20 -left-20 animate-float">
+                      <svg viewBox="0 0 100 100" class="w-32 h-32" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="55" r="30" fill="#D2B48C" stroke="#8E6A5A" strokeWidth="2" /><circle cx="35" cy="30" r="12" fill="#D2B48C" stroke="#8E6A5A" strokeWidth="2" /><circle cx="65" cy="30" r="12" fill="#D2B48C" stroke="#8E6A5A" strokeWidth="2" /><circle cx="50" cy="60" r="15" fill="#F5DEB3" /><circle cx="45" cy="52" r="3" fill="#8E6A5A" /><circle cx="55" cy="52" r="3" fill="#8E6A5A" /><path d="M 45 65 Q 50 70 55 65" stroke="#8E6A5A" strokeWidth="2" fill="none" /><path d="M 50 58 L 50 63" stroke="#8E6A5A" strokeWidth="2" fill="none" /></svg>
+                   </div>
+                   <div class="absolute -top-10 -right-24 animate-float" style="animation-delay: 1s;">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-28 w-28 text-brand-pink" viewBox="0 0 100 100"><circle cx="50" cy="40" r="30" fill="currentColor"/><path d="M50 70 l-10 20 h20 z" fill="currentColor"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-brand-purple -mt-10 ml-12" viewBox="0 0 100 100"><circle cx="50" cy="40" r="30" fill="currentColor"/><path d="M50 70 l-10 20 h20 z" fill="currentColor"/></svg>
+                   </div>
+
+                  <h2 class="text-2xl font-bold mb-4">Para confirmar tu asistencia, ten a la mano:</h2>
+                  <div class="space-y-4 text-left inline-block bg-brand-mint p-6 rounded-2xl shadow-md">
+                      <p class="text-lg"><strong>1.</strong> Nombre completo de quien en su momento fue prematuro.</p>
+                      <p class="text-lg"><strong>2.</strong> Nombres de acompañantes (no más de 2 personas).</p>
+                      <p class="text-lg"><strong>3.</strong> Número de celular para agregar a grupo de WhatsApp.</p>
+                  </div>
+                  <a href="https://forms.gle/2ibneRctBQ4TGMBWA" target="_blank" rel="noopener noreferrer" class="mt-8 inline-flex items-center justify-center space-x-3 text-xl font-bold bg-green-200 rounded-full px-8 py-4 hover:bg-green-300 transition-colors shadow-lg transform hover:scale-105 duration-300 ease-in-out">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                    <span>Registrarse Aquí</span>
+                  </a>
+                </div>
+              </section>
+              
+              <footer class="w-full text-center mt-4 mb-8 px-4 font-body italic text-brand-text-dark scroll-animate">
+                  <p>"La Fe sin ciencia, es coja; la ciencia sin fe, es ciega"</p>
+              </footer>
+            </div>
+          </div>
+        </main>
+        
+        <div class="fixed bottom-4 right-4 z-50">
+            <div id="youtube-player" class="absolute opacity-0 pointer-events-none"></div>
+            <button id="music-toggle" class="bg-brand-pink text-white rounded-full p-3 shadow-lg hover:bg-brand-text focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-pink transition-transform transform hover:scale-110" aria-label="Pause music">
+            </button>
         </div>
     </div>
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const audio = document.getElementById('background-music');
-            const toggleButton = document.getElementById('music-toggle');
+        // YouTube Player Logic
+        let player;
+        const videoId = '2ZUHlrir4Og';
 
-            const playIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                             </svg>`;
-            
-            const pauseIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                              </svg>`;
-            
-            toggleButton.innerHTML = playIcon;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                height: '0',
+                width: '0',
+                videoId: videoId,
+                playerVars: {
+                    'autoplay': 1, 'controls': 0, 'loop': 1, 'playlist': videoId,
+                    'modestbranding': 1, 'rel': 0, 'showinfo': 0, 'iv_load_policy': 3
+                },
+                events: { 'onReady': onPlayerReady, 'onStateChange': onPlayerStateChange }
+            });
+        }
 
-            toggleButton.addEventListener('click', () => {
-                if (audio.paused) {
-                    audio.play().catch(error => console.error("Audio play failed:", error));
-                    toggleButton.innerHTML = pauseIcon;
-                    toggleButton.setAttribute('aria-label', 'Pause music');
-                } else {
-                    audio.pause();
-                    toggleButton.innerHTML = playIcon;
-                    toggleButton.setAttribute('aria-label', 'Play music');
+        const toggleButton = document.getElementById('music-toggle');
+        const playIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`;
+        const pauseIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`;
+        
+        toggleButton.innerHTML = pauseIcon; 
+
+        function onPlayerReady(event) {
+            event.target.playVideo();
+            event.target.setVolume(50);
+        }
+
+        function onPlayerStateChange(event) {
+            toggleButton.innerHTML = (event.data == YT.PlayerState.PLAYING) ? pauseIcon : playIcon;
+            toggleButton.setAttribute('aria-label', (event.data == YT.PlayerState.PLAYING) ? 'Pause music' : 'Play music');
+        }
+
+        function togglePlayPause() {
+            if (player && typeof player.getPlayerState === 'function') {
+                const playerState = player.getPlayerState();
+                if (playerState == YT.PlayerState.PLAYING) player.pauseVideo();
+                else player.playVideo();
+            }
+        }
+        toggleButton.addEventListener('click', togglePlayPause);
+
+        // Scroll Animation Logic
+        const animatedElements = document.querySelectorAll('.scroll-animate');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
                 }
             });
-        });
+        }, { threshold: 0.1 });
+
+        animatedElements.forEach(el => observer.observe(el));
     </script>
   </body>
 </html>
