@@ -98,6 +98,24 @@
                 <h1 class="font-display text-5xl sm:text-7xl font-medium text-brand-text drop-shadow-md">
                     DIA MUNDIAL DEL PREMATURO
                 </h1>
+                <div id="countdown" class="mt-8 flex justify-center space-x-2 sm:space-x-4 text-center">
+                    <div class="bg-white/70 backdrop-blur-sm p-3 sm:p-4 rounded-xl shadow-md min-w-[70px] sm:min-w-[90px]">
+                        <span id="days" class="font-display text-3xl sm:text-5xl text-brand-text">00</span>
+                        <span class="block text-xs sm:text-sm font-body text-brand-text-dark">Días</span>
+                    </div>
+                    <div class="bg-white/70 backdrop-blur-sm p-3 sm:p-4 rounded-xl shadow-md min-w-[70px] sm:min-w-[90px]">
+                        <span id="hours" class="font-display text-3xl sm:text-5xl text-brand-text">00</span>
+                        <span class="block text-xs sm:text-sm font-body text-brand-text-dark">Horas</span>
+                    </div>
+                    <div class="bg-white/70 backdrop-blur-sm p-3 sm:p-4 rounded-xl shadow-md min-w-[70px] sm:min-w-[90px]">
+                        <span id="minutes" class="font-display text-3xl sm:text-5xl text-brand-text">00</span>
+                        <span class="block text-xs sm:text-sm font-body text-brand-text-dark">Minutos</span>
+                    </div>
+                    <div class="bg-white/70 backdrop-blur-sm p-3 sm:p-4 rounded-xl shadow-md min-w-[70px] sm:min-w-[90px]">
+                        <span id="seconds" class="font-display text-3xl sm:text-5xl text-brand-text">00</span>
+                        <span class="block text-xs sm:text-sm font-body text-brand-text-dark">Segundos</span>
+                    </div>
+                </div>
             </div>
              <div class="absolute bottom-10 text-brand-text-dark font-bold text-lg animate-pulse">
                 <p>Desliza para descubrir</p>
@@ -214,6 +232,41 @@
     </div>
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
+        // Countdown Timer Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const countdownDate = new Date("2025-11-17T09:30:00").getTime();
+
+            const countdownFunction = setInterval(function() {
+                const now = new Date().getTime();
+                const distance = countdownDate - now;
+
+                const daysEl = document.getElementById('days');
+                const hoursEl = document.getElementById('hours');
+                const minutesEl = document.getElementById('minutes');
+                const secondsEl = document.getElementById('seconds');
+                const countdownEl = document.getElementById('countdown');
+
+                if (distance < 0) {
+                    clearInterval(countdownFunction);
+                    if (countdownEl) {
+                       countdownEl.innerHTML = '<h2 class="font-display text-3xl sm:text-4xl text-brand-text bg-white/70 backdrop-blur-sm py-4 px-6 rounded-xl shadow-md">¡La celebración ha comenzado!</h2>';
+                    }
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                if (daysEl) daysEl.innerText = String(days).padStart(2, '0');
+                if (hoursEl) hoursEl.innerText = String(hours).padStart(2, '0');
+                if (minutesEl) minutesEl.innerText = String(minutes).padStart(2, '0');
+                if (secondsEl) secondsEl.innerText = String(seconds).padStart(2, '0');
+
+            }, 1000);
+        });
+
         // Confetti Logic
         const confettiContainer = document.getElementById('confetti-container');
         const confettiColors = ['#F7B9D4', '#C6C6E8', '#FAF3A5', '#D5EBD3', '#C3E0F4', '#FF8C82'];
