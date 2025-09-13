@@ -203,22 +203,22 @@
                 <h2 class="text-3xl sm:text-4xl font-display text-brand-text text-center mb-8">Nuestros Pequeños Héroes</h2>
                 <div id="image-gallery" class="grid grid-cols-2 md:grid-cols-3 gap-4">
                   <div class="aspect-w-1 aspect-h-1">
-                    <img src="https://source.unsplash.com/400x400/?baby,party-hat" alt="Adorable bebé celebrando con un gorrito de fiesta." class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition-transform duration-300 w-full h-full object-cover">
+                    <img src="./assets/gallery-1.jpg" alt="Adorable bebé celebrando con un gorrito de fiesta." class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition-transform duration-300 w-full h-full object-cover">
                   </div>
                   <div class="aspect-w-1 aspect-h-1">
-                    <img src="https://source.unsplash.com/400x400/?mother,baby,celebration" alt="Alegre mamá y su bebé rodeados de globos festivos." class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition-transform duration-300 w-full h-full object-cover">
+                    <img src="./assets/gallery-2.jpg" alt="Alegre mamá y su bebé rodeados de globos festivos." class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition-transform duration-300 w-full h-full object-cover">
                   </div>
                   <div class="aspect-w-1 aspect-h-1">
-                    <img src="https://source.unsplash.com/400x400/?baby,feet,cupcake" alt="Diminutos pies de bebé junto a un cupcake de celebración." class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition-transform duration-300 w-full h-full object-cover">
+                    <img src="./assets/gallery-3.jpg" alt="Diminutos pies de bebé junto a un cupcake de celebración." class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition-transform duration-300 w-full h-full object-cover">
                   </div>
                   <div class="aspect-w-1 aspect-h-1">
-                    <img src="https://source.unsplash.com/400x400/?tiny-shoes,celebration" alt="Un par de zapatitos de bebé sobre un fondo festivo y colorido." class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition-transform duration-300 w-full h-full object-cover">
+                    <img src="./assets/gallery-4.jpg" alt="Un par de zapatitos de bebé sobre un fondo festivo y colorido." class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition-transform duration-300 w-full h-full object-cover">
                   </div>
                   <div class="aspect-w-1 aspect-h-1">
-                    <img src="https://source.unsplash.com/400x400/?happy,family,balloons" alt="Familia feliz celebrando juntos con alegría." class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition-transform duration-300 w-full h-full object-cover">
+                    <img src="./assets/gallery-5.jpg" alt="Familia feliz celebrando juntos con alegría." class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition-transform duration-300 w-full h-full object-cover">
                   </div>
                   <div class="aspect-w-1 aspect-h-1">
-                    <img src="https://source.unsplash.com/400x400/?welcome-baby,banner" alt="Un cartel de 'Bienvenido Bebé' en una fiesta." class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition-transform duration-300 w-full h-full object-cover">
+                    <img src="./assets/gallery-6.jpg" alt="Un cartel de 'Bienvenido Bebé' en una fiesta." class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition-transform duration-300 w-full h-full object-cover">
                   </div>
                 </div>
               </section>
@@ -260,18 +260,16 @@
             </div>
         </div>
 
+        <audio id="background-music" src="./assets/background-music.mp3" loop preload="auto"></audio>
         <div class="fixed bottom-4 right-4 z-50">
-            <div id="youtube-player" class="absolute opacity-0 pointer-events-none"></div>
-            <button id="music-toggle" class="bg-brand-pink text-white rounded-full p-3 shadow-lg hover:bg-brand-text focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-pink transition-transform transform hover:scale-110" aria-label="Pause music">
+            <button id="music-toggle" class="bg-brand-pink text-white rounded-full p-3 shadow-lg hover:bg-brand-text focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-pink transition-transform transform hover:scale-110" aria-label="Play music">
             </button>
         </div>
     </div>
-    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
-        // Countdown Timer Logic
         document.addEventListener('DOMContentLoaded', () => {
+            // Countdown Timer Logic
             const countdownDate = new Date("2025-11-17T09:30:00").getTime();
-
             const countdownFunction = setInterval(function() {
                 const now = new Date().getTime();
                 const distance = countdownDate - now;
@@ -301,126 +299,123 @@
                 if (secondsEl) secondsEl.innerText = String(seconds).padStart(2, '0');
 
             }, 1000);
-        });
 
-        // Confetti Logic
-        const confettiContainer = document.getElementById('confetti-container');
-        const confettiColors = ['#F7B9D4', '#C6C6E8', '#FAF3A5', '#D5EBD3', '#C3E0F4', '#FF8C82'];
-        const confettiCount = 50;
-        
-        for (let i = 0; i < confettiCount; i++) {
-            const confetti = document.createElement('div');
-            confetti.classList.add('confetti');
-            confetti.style.left = `${Math.random() * 100}vw`;
-            confetti.style.backgroundColor = confettiColors[Math.floor(Math.random() * confettiColors.length)];
-            confetti.style.animationDelay = `${Math.random() * 8}s`;
-            confetti.style.width = `${Math.floor(Math.random() * 5) + 8}px`;
-            confetti.style.height = confetti.style.width;
-            confettiContainer.appendChild(confetti);
-        }
-
-        // YouTube Player Logic
-        let player;
-        const videoId = '2ZUHlrir4Og';
-
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('youtube-player', {
-                height: '0',
-                width: '0',
-                videoId: videoId,
-                playerVars: {
-                    'autoplay': 1, 'controls': 0, 'loop': 1, 'playlist': videoId,
-                    'modestbranding': 1, 'rel': 0, 'showinfo': 0, 'iv_load_policy': 3
-                },
-                events: { 'onReady': onPlayerReady, 'onStateChange': onPlayerStateChange }
-            });
-        }
-
-        const toggleButton = document.getElementById('music-toggle');
-        const playIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`;
-        const pauseIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`;
-        
-        toggleButton.innerHTML = pauseIcon; 
-
-        function onPlayerReady(event) {
-            event.target.playVideo();
-            event.target.setVolume(50);
-        }
-
-        function onPlayerStateChange(event) {
-            toggleButton.innerHTML = (event.data == YT.PlayerState.PLAYING) ? pauseIcon : playIcon;
-            toggleButton.setAttribute('aria-label', (event.data == YT.PlayerState.PLAYING) ? 'Pause music' : 'Play music');
-        }
-
-        function togglePlayPause() {
-            if (player && typeof player.getPlayerState === 'function') {
-                const playerState = player.getPlayerState();
-                if (playerState == YT.PlayerState.PLAYING) player.pauseVideo();
-                else player.playVideo();
-            }
-        }
-        toggleButton.addEventListener('click', togglePlayPause);
-
-        // Scroll Animation Logic
-        const animatedElements = document.querySelectorAll('.scroll-animate');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        animatedElements.forEach(el => observer.observe(el));
-
-        // Gallery Modal Logic
-        const gallery = document.getElementById('image-gallery');
-        const modal = document.getElementById('image-modal');
-
-        if (gallery && modal) {
-            const modalContent = modal.querySelector('div.relative');
-            const modalImg = document.getElementById('modal-image');
-            const closeModalBtn = document.getElementById('modal-close');
-
-            if (modalContent && modalImg && closeModalBtn) {
-                const showModal = (imgSrc, imgAlt) => {
-                    modalImg.src = imgSrc;
-                    modalImg.alt = imgAlt;
-                    modal.classList.remove('hidden');
-                    modal.classList.add('flex');
-                    setTimeout(() => {
-                        modal.classList.remove('opacity-0');
-                        modalContent.classList.remove('scale-95');
-                    }, 20);
-                };
-
-                const hideModal = () => {
-                    modal.classList.add('opacity-0');
-                    modalContent.classList.add('scale-95');
-                    setTimeout(() => {
-                        modal.classList.add('hidden');
-                        modal.classList.remove('flex');
-                        modalImg.src = '';
-                        modalImg.alt = 'Imagen ampliada';
-                    }, 300);
-                };
+            // Confetti Logic
+            const confettiContainer = document.getElementById('confetti-container');
+            if (confettiContainer) {
+                const confettiColors = ['#F7B9D4', '#C6C6E8', '#FAF3A5', '#D5EBD3', '#C3E0F4', '#FF8C82'];
+                const confettiCount = 50;
                 
-                const galleryImages = gallery.querySelectorAll('img');
-                galleryImages.forEach(img => {
-                    img.addEventListener('click', () => showModal(img.src, img.alt));
-                });
+                for (let i = 0; i < confettiCount; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.classList.add('confetti');
+                    confetti.style.left = `${Math.random() * 100}vw`;
+                    confetti.style.backgroundColor = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+                    confetti.style.animationDelay = `${Math.random() * 8}s`;
+                    confetti.style.width = `${Math.floor(Math.random() * 5) + 8}px`;
+                    confetti.style.height = confetti.style.width;
+                    confettiContainer.appendChild(confetti);
+                }
+            }
 
-                closeModalBtn.addEventListener('click', hideModal);
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal) hideModal();
-                });
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-                        hideModal();
+            // HTML5 Audio Player Logic
+            const audio = document.getElementById('background-music');
+            const musicToggleButton = document.getElementById('music-toggle');
+            const playIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`;
+            const pauseIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`;
+
+            function updateMusicButton() {
+                if (!musicToggleButton) return;
+                if (!audio || audio.paused) {
+                    musicToggleButton.innerHTML = playIcon;
+                    musicToggleButton.setAttribute('aria-label', 'Play music');
+                } else {
+                    musicToggleButton.innerHTML = pauseIcon;
+                    musicToggleButton.setAttribute('aria-label', 'Pause music');
+                }
+            }
+
+            function toggleMusic() {
+                if (!audio) return;
+                if (audio.paused) {
+                    audio.play().catch(error => {
+                        console.error("Audio playback failed. It might require user interaction.", error);
+                        updateMusicButton();
+                    });
+                } else {
+                    audio.pause();
+                }
+            }
+
+            if (audio && musicToggleButton) {
+                audio.addEventListener('play', updateMusicButton);
+                audio.addEventListener('pause', updateMusicButton);
+                audio.addEventListener('ended', updateMusicButton);
+                musicToggleButton.addEventListener('click', toggleMusic);
+                updateMusicButton();
+            }
+
+            // Scroll Animation Logic
+            const animatedElements = document.querySelectorAll('.scroll-animate');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
                     }
                 });
+            }, { threshold: 0.1 });
+
+            animatedElements.forEach(el => observer.observe(el));
+
+            // Gallery Modal Logic
+            const gallery = document.getElementById('image-gallery');
+            const modal = document.getElementById('image-modal');
+
+            if (gallery && modal) {
+                const modalContent = modal.querySelector('div.relative');
+                const modalImg = document.getElementById('modal-image');
+                const closeModalBtn = document.getElementById('modal-close');
+
+                if (modalContent && modalImg && closeModalBtn) {
+                    const showModal = (imgSrc, imgAlt) => {
+                        modalImg.src = imgSrc;
+                        modalImg.alt = imgAlt;
+                        modal.classList.remove('hidden');
+                        modal.classList.add('flex');
+                        setTimeout(() => {
+                            modal.classList.remove('opacity-0');
+                            modalContent.classList.remove('scale-95');
+                        }, 20);
+                    };
+
+                    const hideModal = () => {
+                        modal.classList.add('opacity-0');
+                        modalContent.classList.add('scale-95');
+                        setTimeout(() => {
+                            modal.classList.add('hidden');
+                            modal.classList.remove('flex');
+                            modalImg.src = '';
+                            modalImg.alt = 'Imagen ampliada';
+                        }, 300);
+                    };
+                    
+                    const galleryImages = gallery.querySelectorAll('img');
+                    galleryImages.forEach(img => {
+                        img.addEventListener('click', () => showModal(img.src, img.alt));
+                    });
+
+                    closeModalBtn.addEventListener('click', hideModal);
+                    modal.addEventListener('click', (e) => {
+                        if (e.target === modal) hideModal();
+                    });
+                    document.addEventListener('keydown', (e) => {
+                        if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                            hideModal();
+                        }
+                    });
+                }
             }
-        }
+        });
     </script>
   </body>
 </html>
